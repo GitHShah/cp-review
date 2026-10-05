@@ -1,0 +1,5 @@
+﻿{
+  "files.exclude": { "data/raw": true },
+  "search.exclude": { "data/raw": true },
+  "files.watcherExclude": { "**/data/raw/**": true }
+}
