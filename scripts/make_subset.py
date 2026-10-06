@@ -94,7 +94,7 @@ def main():
     ]
     sampled_groups = []
 
-    # Load submission details only for the selected problem files.
+
     for problem_id in selected_problems:
         metadata_path = METADATA_DIR / f"{problem_id}.csv"
         df = pd.read_csv(metadata_path, usecols=columns_to_read)
@@ -103,7 +103,7 @@ def main():
             & (df["status"].isin(KEEP_STATUSES))
         ]
 
-        # Sample each verdict independently so both classes are represented.
+
         for status in KEEP_STATUSES:
             candidates = df.loc[df["status"] == status]
             sample_count = min(MAX_PER_STATUS, len(candidates))
@@ -113,7 +113,6 @@ def main():
 
     subset = pd.concat(sampled_groups, ignore_index=True)
 
-    # CodeNet paths use the language folder and extension recorded in metadata.
     subset["path"] = [
         str(
             (DATA_DIR / problem_id / "Python" / f"{submission_id}.{extension}")
