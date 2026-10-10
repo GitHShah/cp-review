@@ -44,3 +44,10 @@ This document records the core architectural and methodological decisions for th
 ## 7. Security & Execution
 - **Decision:** **Never execute, `eval()`, or `exec()` user code.**
 - **Rationale:** The entire analysis must remain purely static (AST-based and model-inferred) to prevent arbitrary code execution vulnerabilities when analyzing untrusted submissions.
+
+## Data pipeline (Days 3 to 5)
+- Subset: 100 random problems out of 832 that have at least 20 Accepted and 10 TLE Python submissions. Up to 40 per class per problem (7,274 rows), seed 42.
+- Cleaning: dropped 189 files that failed to parse (mostly Python 2) and 1 file that was too big. 7,084 rows kept (3,828 Accepted, 3,256 TLE). No problem ended up with fewer than 5 of either class.
+- The 46% TLE share comes from my sampling cap, not from real life. Real data has far more Accepted than TLE.
+- Split: by problem, 70/15/15 problems, seed 42. TLE share is about 0.47 in train, 0.42 in val and 0.46 in test.
+- tests/test_split.py checks that no problem is in two splits, all three splits exist, and each split has both classes.
